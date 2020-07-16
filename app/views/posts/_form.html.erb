@@ -1,0 +1,35 @@
+<% if notice.present? %>
+  <%= notice %>
+<% end %>
+<%= form_with model: @post, url: posts_path, local: true do |form| %>
+  <% if @post.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@post.errors.count, "error") %> prohibited
+        this post from being saved:
+      </h2>
+      <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>
+    <%= form.label :post %><br>
+    <%= form.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= form.label :Number_of_posts %><br>
+    <%= form.text_area :text %>
+  </p>
+
+  <%= form.select(:category_id, Category.all.collect {|u| [u.name, u.id]}, :prompt => 'Select') %>
+
+  <p>
+    <%= form.submit %>
+  </p>
+
+<% end %>
