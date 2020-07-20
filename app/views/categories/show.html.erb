@@ -1,0 +1,30 @@
+<h2 class="text-center p-3"><b><%= @category.name %></b></h2>
+
+<div class="container">
+	<div class="col-md-6 mx-md-auto">
+		<div class="card" style="width: 25rem; text-align: center;">
+      
+      <% if @category.posts.present? %>
+				<% @category.posts.each do |post| %>
+					<div class="card-text p-3">
+						<p>
+			    		<strong>Post:</strong>
+						 	<%= post.title %>
+						</p>	 
+						<p>
+					    <strong>Description:</strong>
+							<%= post.description %>
+						</p>
+						<p>
+							<strong>Published at:</strong>
+							<%= post.published_at %>
+						</p>
+			    </div><hr class="m-0">
+			 	<% end %>
+			<% else %>
+			  <p>Sorry, there are no posts in this category</p>  
+			<% end %>
+			<b><%= link_to "Back to categories",categories_path %></b>
+		</div>
+	</div>
+</div>

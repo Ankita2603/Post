@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 
 	def new
 		@post = Post.new
+		@category = Category.all
 	end
 
 	def edit
@@ -16,24 +17,18 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		@post = Post.new(post_params)
-		post = Post.find_by(params[:category_id])
-		if post.present?
-		  redirect_to new_post_path, notice: "This category post already created"
+	    @post = Post.new(post_params)
+		if @post.save
+			redirect_to post_path(@post)
 		else
-			if @post.save
-			   redirect_to @post
-			else
-				render 'new'
-			end	
-		end
+			render 'new'
+		end	
 	end
 
 	def update
- 	 @post = Post.find(params[:id])
- 
+ 		@post = Post.find(params[:id])
   		if @post.update(post_params)
-    		redirect_to @post
+    		redirect_to post_path
   		else
     		render 'edit'
   		end
@@ -47,7 +42,8 @@ class PostsController < ApplicationController
 	end
 
 	private
+
 	def post_params
-		params.require(:post).permit(:title, :text, :category_id)
+		params.require(:post).permit(:title, :description, :cover_image, :published_at, :category_id)
 	end
 end

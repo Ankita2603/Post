@@ -1,24 +1,36 @@
-<h1>New Post</h1>
-<%= link_to 'New Post', new_post_path %>
-<table>
-  <tr>
-    <th>Post</th>
-    <th>Number of post</th>
-    <th>Category-name</th>
-    <th></th>
-  </tr>
- 
-  <% @posts.each do |post| %>
-    <tr>
-      <td style="text-align: center;"><%= post.title %></td>
-      <td style="text-align: center;"><%= post.text %></td>
-      <td style="text-align: center;"><%= post.category.name %></td>
-      <td><%= link_to 'Show', post_path(post) %></td>
-      <td><%= link_to 'Edit', edit_post_path(post) %></td>
-      <td><%= link_to 'Destroy', post_path(post),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
+<h1 class="text-center my-5">Our Post</h1>
+<div class="card w-75" style="margin-left: 12%">
+    <%= link_to 'Add Post', new_post_path, class: "btn btn-primary py-3" %>
+    <table>
+      <tr class="text-center card-header">
+        <th class="py-3">Post</th>
+        <th class="py-3">Description</th>
+        <th class="py-3">Cover Image</th>
+        <th class="py-3">published at</th>
+        <th class="py-3">Category Name</th>
+        <th class="py-3">action</th>
+        <th class="py-3"></th>
+        <th class="py-3"></th>
+      </tr>
+     
+      <% @posts.each do |post| %>
+        <tr>
+          <td class="text-center p-3"><%= post.title %></td>
+          <td class="text-center p-3"><%= post.description %></td>
+          <td class="text-center p-3"><%= image_tag post.cover_image.url, class: "w-25" %></td>
+          <td class="text-center p-3"><%= post.published_at %></td>
+          <% if post.category.present? %>
+            <td class="text-center p-3"><%= post.category.name %></td>
+          <% else %>
+            <td class="text-center p-3">Sorry, No category</td>
+          <% end %>
+          <td><%= link_to 'Show', post_path(post), class: "btn btn-success" %></td>
+          <td><%= link_to 'Edit', edit_post_path(post), class: "btn btn-info" %></td>
+          <td><%= link_to 'Destroy', post_path(post),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
 
-    </tr>
-  <% end %>
-</table>
+        </tr>
+      <% end %>
+    </table>
+</div>

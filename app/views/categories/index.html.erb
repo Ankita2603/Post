@@ -1,0 +1,16 @@
+<h1 class="text-center p-3"><b>Our Categories</b></h1>
+<div class="container">
+	<div class="row">
+    <% @categories.each do |category| %>
+		  <div class="col-md-4 mt-3">
+        <%= link_to category_path(category) do %>
+		      <div class="card shadow border-0">
+		    		<div class="card-body">
+		   	      <p class="text-center text-dark"><%= category.name %></p>
+		   	    </div>  
+		   	  </div>  
+		    <% end %> 	
+		  </div>  
+  	<% end %>
+  </div> 	
+</div>

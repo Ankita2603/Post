@@ -1,5 +1,15 @@
-<h1>Edit Post</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Back', posts_path %>
+<div class="container mt-5">
+  <h1 class="text-center">Edit Post</h1>
+  <div class="row">
+  	<% if notice.present? %>
+  	    <div class="alert alert-success">
+          <%= notice %>
+        </div>  
+    <% end %>
+    <div class="col-md-6 mx-md-auto align-self-center">
+      <div class="card mt-5">
+        <%= render 'form' %>
+      </div>  
+    </div>
+  </div>
+</div>      
