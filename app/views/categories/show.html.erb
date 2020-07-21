@@ -1,30 +1,23 @@
 <h2 class="text-center p-3"><b><%= @category.name %></b></h2>
-
-<div class="container">
-	<div class="col-md-6 mx-md-auto">
-		<div class="card" style="width: 25rem; text-align: center;">
-      
-      <% if @category.posts.present? %>
-				<% @category.posts.each do |post| %>
-					<div class="card-text p-3">
-						<p>
-			    		<strong>Post:</strong>
-						 	<%= post.title %>
-						</p>	 
-						<p>
-					    <strong>Description:</strong>
-							<%= post.description %>
-						</p>
-						<p>
-							<strong>Published at:</strong>
-							<%= post.published_at %>
-						</p>
-			    </div><hr class="m-0">
-			 	<% end %>
-			<% else %>
-			  <p>Sorry, there are no posts in this category</p>  
-			<% end %>
-			<b><%= link_to "Back to categories",categories_path %></b>
-		</div>
-	</div>
+<div class="container">	
+	<b><%= link_to "<<Back to categories>>",categories_path, class: "btn btn-primary" %></b>
+  <% if @category.posts.present? %>
+		<% @category.posts.each do |post| %>
+		  <div class="card mt-3">
+		  	<div class="card-body">
+				  <div class="media">
+					  <%= image_tag post.cover_image.url, class: "mr-3 card-img" %>
+					  <div class="media-body">
+					    <div><%= post.title %></div>
+					  	<div><%= post.description %></div>
+							<div><%= post.published_at %></div>
+					  </div>
+					</div>
+				</div>	
+			</div>	
+		<% end %>
+	<% else %>
+	  <p>Sorry, there are no posts in this category</p>  
+	<% end %>
+	
 </div>
